@@ -1,0 +1,147 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "冻结的公开发布版本",
+  "description": "每次公开发布生成一个不可变快照；任何修订只追加新版本并附差异说明。",
+  "type": "object",
+  "required": ["releaseId", "period", "version", "publishedAt", "publishedBy", "table", "signatures", "changeNotice", "supersedes"],
+  "properties": {
+    "releaseId": { "type": "string", "pattern": "^R-[0-9]{4}-[0-9]{2}-v[0-9]+$" },
+    "period": { "type": "string", "pattern": "^[0-9]{4}-[0-9]{2}$" },
+    "version": { "type": "integer", "minimum": 1 },
+    "publishedAt": { "type": "string", "format": "date-time" },
+    "publishedBy": {
+      "type": "object",
+      "required": ["actorId", "name"],
+      "properties": {
+        "actorId": { "type": "string" },
+        "name": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "table": {
+      "type": "object",
+      "required": ["period", "unit", "month", "cumulative", "yoy", "sources"],
+      "properties": {
+        "period": { "type": "string" },
+        "unit": { "const": "亿千瓦时" },
+        "month": { "$ref": "#/$defs/values" },
+        "cumulative": { "$ref": "#/$defs/values" },
+        "yoy": {
+          "type": "object",
+          "required": ["month", "cumulative"],
+          "properties": {
+            "month": { "$ref": "#/$defs/yoyValues" },
+            "cumulative": { "$ref": "#/$defs/yoyValues" }
+          },
+          "additionalProperties": false
+        },
+        "sources": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["region", "submissionId", "receivedAt", "batches"],
+            "properties": {
+              "region": { "type": "string" },
+              "submissionId": { "type": "string" },
+              "receivedAt": { "type": "string", "format": "date-time" },
+              "batches": { "type": "array" }
+            },
+            "additionalProperties": false
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "diagnosis": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["region", "status", "findings"],
+        "properties": {
+          "region": { "type": "string" },
+          "status": { "enum": ["missing", "reported"] },
+          "findings": { "type": "array" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "signatures": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["actorId", "name", "role", "decision", "at"],
+        "properties": {
+          "actorId": { "type": "string" },
+          "name": { "type": "string" },
+          "role": { "enum": ["analyst", "administrator"] },
+          "decision": { "enum": ["approved", "rejected"] },
+          "note": { "type": "string" },
+          "at": { "type": "string", "format": "date-time" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "changeNotice": {
+      "type": ["object", "null"],
+      "required": ["type", "summary", "fromVersion", "diff"],
+      "properties": {
+        "type": { "enum": ["late-report", "unit-correction", "reclassification", "base-revision", "erratum"] },
+        "summary": { "type": "string" },
+        "regions": { "type": "array", "items": { "type": "string" } },
+        "fromVersion": { "type": ["integer", "null"] },
+        "diff": {
+          "type": ["object", "null"],
+          "required": ["changed", "changes"],
+          "properties": {
+            "changed": { "type": "boolean" },
+            "changes": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": ["scope", "sector", "from", "to", "delta"],
+                "properties": {
+                  "scope": { "enum": ["month", "cumulative"] },
+                  "sector": { "type": "string" },
+                  "label": { "type": "string" },
+                  "from": { "type": ["number", "null"] },
+                  "to": { "type": ["number", "null"] },
+                  "delta": { "type": "number" }
+                },
+                "additionalProperties": false
+              }
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "supersedes": { "type": ["string", "null"] }
+  },
+  "$defs": {
+    "values": {
+      "type": "object",
+      "required": ["primary", "secondary", "tertiary", "residential", "total"],
+      "properties": {
+        "primary": { "type": "number" },
+        "secondary": { "type": "number" },
+        "tertiary": { "type": "number" },
+        "residential": { "type": "number" },
+        "total": { "type": "number" }
+      },
+      "additionalProperties": false
+    },
+    "yoyValues": {
+      "type": "object",
+      "properties": {
+        "primary": { "type": "number" },
+        "secondary": { "type": "number" },
+        "tertiary": { "type": "number" },
+        "residential": { "type": "number" },
+        "total": { "type": "number" }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

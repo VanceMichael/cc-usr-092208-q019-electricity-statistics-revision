@@ -1,0 +1,97 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "地区分产业用电量报送",
+  "description": "地方能源统计单位提交的单一辖区单月报送；计量批次、行业分类映射与气象注记随报送登记。",
+  "type": "object",
+  "required": ["id", "region", "period", "unit", "month", "cumulative", "priorCumulative", "baseYearMonth", "baseYearCumulative"],
+  "properties": {
+    "id": { "type": "string", "minLength": 1 },
+    "region": { "type": "string", "minLength": 1 },
+    "period": { "type": "string", "pattern": "^[0-9]{4}-[0-9]{2}$" },
+    "unit": { "enum": ["千瓦时", "万千瓦时", "亿千瓦时"] },
+    "month": { "$ref": "#/$defs/values" },
+    "cumulative": { "$ref": "#/$defs/values" },
+    "priorCumulative": { "$ref": "#/$defs/values" },
+    "baseYearMonth": { "$ref": "#/$defs/valuesWithYoy" },
+    "baseYearCumulative": { "$ref": "#/$defs/valuesWithYoy" },
+    "batches": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id"],
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "late": { "type": "boolean" },
+          "receivedAt": { "type": "string", "format": "date-time" },
+          "note": { "type": "string" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "industryMapping": {
+      "type": "object",
+      "description": "行业重分类映射，键为旧行业代码",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["to", "effectiveFrom"],
+        "properties": {
+          "to": { "type": "string", "minLength": 1 },
+          "effectiveFrom": { "type": "string", "pattern": "^[0-9]{4}-[0-9]{2}$" },
+          "reason": { "type": "string" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "weatherNote": {
+      "type": "object",
+      "required": ["events"],
+      "properties": {
+        "events": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["type", "summary"],
+            "properties": {
+              "type": { "enum": ["typhoon", "heavy-rain", "heat-wave", "other"] },
+              "summary": { "type": "string" },
+              "impactOnResidential": { "type": "string" }
+            },
+            "additionalProperties": false
+          }
+        },
+        "summary": { "type": "string" }
+      },
+      "additionalProperties": false
+    }
+  },
+  "$defs": {
+    "values": {
+      "type": "object",
+      "properties": {
+        "primary": { "type": "number", "minimum": 0 },
+        "secondary": { "type": "number", "minimum": 0 },
+        "tertiary": { "type": "number", "minimum": 0 },
+        "residential": { "type": "number", "minimum": 0 },
+        "total": { "type": "number", "minimum": 0 }
+      },
+      "additionalProperties": false
+    },
+    "valuesWithYoy": {
+      "type": "object",
+      "properties": {
+        "primary": { "type": "number", "minimum": 0 },
+        "secondary": { "type": "number", "minimum": 0 },
+        "tertiary": { "type": "number", "minimum": 0 },
+        "residential": { "type": "number", "minimum": 0 },
+        "total": { "type": "number", "minimum": 0 },
+        "primaryYoy": { "type": "number" },
+        "secondaryYoy": { "type": "number" },
+        "tertiaryYoy": { "type": "number" },
+        "residentialYoy": { "type": "number" },
+        "totalYoy": { "type": "number" }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

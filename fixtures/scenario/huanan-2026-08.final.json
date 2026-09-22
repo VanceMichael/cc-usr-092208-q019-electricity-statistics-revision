@@ -1,0 +1,29 @@
+{
+  "id": "sub-huanan-2026-08-final",
+  "region": "华南",
+  "period": "2026-08",
+  "unit": "亿千瓦时",
+  "month": { "primary": 57, "secondary": 2652, "tertiary": 829, "residential": 614, "total": 4152 },
+  "cumulative": { "primary": 365, "secondary": 19232, "tertiary": 5270, "residential": 3935, "total": 28802 },
+  "priorCumulative": { "primary": 308, "secondary": 16580, "tertiary": 4441, "residential": 3321, "total": 24650 },
+  "baseYearMonth": {
+    "primary": 54, "secondary": 2450, "tertiary": 701, "residential": 650, "total": 3855,
+    "primaryYoy": 5.56, "secondaryYoy": 8.24, "tertiaryYoy": 18.26, "residentialYoy": -5.54, "totalYoy": 7.7
+  },
+  "baseYearCumulative": {
+    "primary": 350, "secondary": 18000, "tertiary": 4800, "residential": 4100, "total": 27250,
+    "primaryYoy": 4.29, "secondaryYoy": 6.84, "tertiaryYoy": 9.79, "residentialYoy": -4.02, "totalYoy": 5.7
+  },
+  "batches": [
+    { "id": "B-HN-0829", "late": false },
+    { "id": "B-HN-0830", "late": false },
+    { "id": "B-HN-0905", "late": true, "receivedAt": "2026-09-05T08:30:00Z", "note": "专线计量点后补回传，第二产业当月与累计各补计 12 亿千瓦时" }
+  ],
+  "weatherNote": {
+    "summary": "八月台风登陆及强降雨天气明显偏多，气温较常年同期偏低，居民空调用电减少。",
+    "events": [
+      { "type": "typhoon", "summary": "台风先后登陆华南沿海", "impactOnResidential": "登陆前后降温明显，制冷需求下降" },
+      { "type": "heavy-rain", "summary": "季风强降雨持续", "impactOnResidential": "闷热天气缓解，居民用电同比下降" }
+    ]
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "id": "sub-huadong-2026-08",
+  "region": "华东",
+  "period": "2026-08",
+  "unit": "亿千瓦时",
+  "month": { "primary": 80, "secondary": 4000, "tertiary": 1200, "residential": 900, "total": 6180 },
+  "cumulative": { "primary": 520, "secondary": 28000, "tertiary": 8000, "residential": 5700, "total": 42220 },
+  "priorCumulative": { "primary": 440, "secondary": 24000, "tertiary": 6800, "residential": 4800, "total": 36040 },
+  "baseYearMonth": {
+    "primary": 76, "secondary": 3650, "tertiary": 1050, "residential": 950, "total": 5726,
+    "primaryYoy": 5.26, "secondaryYoy": 9.59, "tertiaryYoy": 14.29, "residentialYoy": -5.26, "totalYoy": 7.93
+  },
+  "baseYearCumulative": {
+    "primary": 500, "secondary": 26000, "tertiary": 7200, "residential": 6000, "total": 39700,
+    "primaryYoy": 4.0, "secondaryYoy": 7.69, "tertiaryYoy": 11.11, "residentialYoy": -5.0, "totalYoy": 6.35
+  },
+  "batches": [{ "id": "B-HD-0831", "late": false }],
+  "weatherNote": {
+    "summary": "八月受多个台风外围环流及强降雨影响，高温日数减少，居民降温用电同比下降。",
+    "events": [
+      { "type": "typhoon", "summary": "台风季外围环流频繁影响华东沿海", "impactOnResidential": "阵风与云雨压制高温，空调负荷下降" },
+      { "type": "heavy-rain", "summary": "八月强降雨日数偏多", "impactOnResidential": "气温回落，居民制冷用电减少" }
+    ]
+  }
+}

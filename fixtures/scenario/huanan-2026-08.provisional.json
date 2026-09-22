@@ -1,0 +1,28 @@
+{
+  "id": "sub-huanan-2026-08-provisional",
+  "region": "华南",
+  "period": "2026-08",
+  "unit": "亿千瓦时",
+  "month": { "primary": 57, "secondary": 2640, "tertiary": 829, "residential": 614, "total": 4140 },
+  "cumulative": { "primary": 365, "secondary": 19220, "tertiary": 5270, "residential": 3935, "total": 28790 },
+  "priorCumulative": { "primary": 308, "secondary": 16580, "tertiary": 4441, "residential": 3321, "total": 24650 },
+  "baseYearMonth": {
+    "primary": 54, "secondary": 2450, "tertiary": 701, "residential": 650, "total": 3855,
+    "primaryYoy": 5.56, "secondaryYoy": 7.76, "tertiaryYoy": 18.26, "residentialYoy": -5.54, "totalYoy": 7.39
+  },
+  "baseYearCumulative": {
+    "primary": 350, "secondary": 18000, "tertiary": 4800, "residential": 4100, "total": 27250,
+    "primaryYoy": 4.29, "secondaryYoy": 6.78, "tertiaryYoy": 9.79, "residentialYoy": -4.02, "totalYoy": 5.65
+  },
+  "batches": [
+    { "id": "B-HN-0829", "late": false },
+    { "id": "B-HN-0830", "late": false, "note": "尚有部分专线计量点未回传，按快报口径" }
+  ],
+  "weatherNote": {
+    "summary": "八月台风登陆及强降雨天气明显偏多，气温较常年同期偏低，居民空调用电减少。",
+    "events": [
+      { "type": "typhoon", "summary": "台风先后登陆华南沿海", "impactOnResidential": "登陆前后降温明显，制冷需求下降" },
+      { "type": "heavy-rain", "summary": "季风强降雨持续", "impactOnResidential": "闷热天气缓解，居民用电同比下降" }
+    ]
+  }
+}
